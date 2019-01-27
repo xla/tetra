@@ -23,7 +23,7 @@ pub use self::texture::Texture;
 pub use self::ui::NineSlice;
 pub use glm::Vec2;
 
-use glm::{self, Mat3, Mat4};
+use glm::{self, Mat4};
 use glyph_brush::{GlyphBrush, GlyphBrushBuilder};
 
 use crate::error::Result;
@@ -380,18 +380,6 @@ impl DrawParams {
     pub fn clip(mut self, clip: Rectangle) -> DrawParams {
         self.clip = Some(clip);
         self
-    }
-
-    #[deprecated(
-        since = "0.2.6",
-        note = "This was only intended for internal use, but was made public by mistake."
-    )]
-    #[doc(hidden)]
-    pub fn build_matrix(&self) -> Mat3 {
-        glm::translation2d(&self.position)
-            * glm::rotation2d(self.rotation)
-            * glm::scaling2d(&self.scale)
-            * glm::translation2d(&-self.origin)
     }
 }
 

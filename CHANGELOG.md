@@ -5,6 +5,7 @@
 ### Improvements
 
 * **BREAKING:** Tetra now has its own `Key` and `MouseButton` types, instead of exporting the ones from the `sdl2` crate. Some key names have been changed to make them more obvious/consistent.
+* **BREAKING:** The deprecated `build_matrix` method has been removed from `DrawParams`.
 
 ## 0.2.7 (January 23rd, 2019)
 
