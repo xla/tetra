@@ -8,106 +8,20 @@
 //! If a controller is disconnected, the next controller to be connected will take its index - otherwise,
 //! a new one will be allocated. This behaviour might be made smarter in future versions.
 
-use hashbrown::{HashMap, HashSet};
+mod types;
+
 use glm::Vec2;
-use sdl2::controller::{Axis as SdlAxis, Button as SdlButton, GameController};
+use hashbrown::{HashMap, HashSet};
+use sdl2::controller::{Axis as SdlAxis, GameController};
 use sdl2::event::Event;
+use sdl2::keyboard::Keycode as SdlKey;
 use sdl2::{GameControllerSubsystem, Sdl};
 
 use crate::error::{Result, TetraError};
 use crate::graphics;
 use crate::Context;
 
-pub use sdl2::keyboard::Keycode as Key;
-pub use sdl2::mouse::MouseButton;
-
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-#[allow(missing_docs)]
-pub enum GamepadButton {
-    A,
-    B,
-    X,
-    Y,
-    Up,
-    Down,
-    Left,
-    Right,
-    LeftShoulder,
-    LeftTrigger,
-    LeftStick,
-    RightShoulder,
-    RightTrigger,
-    RightStick,
-    Start,
-    Back,
-    Guide,
-}
-
-impl From<SdlButton> for GamepadButton {
-    fn from(button: SdlButton) -> GamepadButton {
-        match button {
-            SdlButton::A => GamepadButton::A,
-            SdlButton::B => GamepadButton::B,
-            SdlButton::X => GamepadButton::X,
-            SdlButton::Y => GamepadButton::Y,
-            SdlButton::DPadUp => GamepadButton::Up,
-            SdlButton::DPadDown => GamepadButton::Down,
-            SdlButton::DPadLeft => GamepadButton::Left,
-            SdlButton::DPadRight => GamepadButton::Right,
-            SdlButton::LeftShoulder => GamepadButton::LeftShoulder,
-            SdlButton::LeftStick => GamepadButton::LeftStick,
-            SdlButton::RightShoulder => GamepadButton::RightShoulder,
-            SdlButton::RightStick => GamepadButton::RightStick,
-            SdlButton::Start => GamepadButton::Start,
-            SdlButton::Back => GamepadButton::Back,
-            SdlButton::Guide => GamepadButton::Guide,
-        }
-    }
-}
-
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-#[allow(missing_docs)]
-pub enum GamepadAxis {
-    LeftStickX,
-    LeftStickY,
-    LeftTrigger,
-    RightStickX,
-    RightStickY,
-    RightTrigger,
-}
-
-impl From<GamepadAxis> for SdlAxis {
-    fn from(axis: GamepadAxis) -> SdlAxis {
-        match axis {
-            GamepadAxis::LeftStickX => SdlAxis::LeftX,
-            GamepadAxis::LeftStickY => SdlAxis::LeftY,
-            GamepadAxis::LeftTrigger => SdlAxis::TriggerLeft,
-            GamepadAxis::RightStickX => SdlAxis::RightX,
-            GamepadAxis::RightStickY => SdlAxis::RightY,
-            GamepadAxis::RightTrigger => SdlAxis::TriggerRight,
-        }
-    }
-}
-
-impl From<SdlAxis> for GamepadAxis {
-    fn from(axis: SdlAxis) -> GamepadAxis {
-        match axis {
-            SdlAxis::LeftX => GamepadAxis::LeftStickX,
-            SdlAxis::LeftY => GamepadAxis::LeftStickY,
-            SdlAxis::TriggerLeft => GamepadAxis::LeftTrigger,
-            SdlAxis::RightX => GamepadAxis::RightStickX,
-            SdlAxis::RightY => GamepadAxis::RightStickY,
-            SdlAxis::TriggerRight => GamepadAxis::RightTrigger,
-        }
-    }
-}
-
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-#[allow(missing_docs)]
-pub enum GamepadStick {
-    LeftStick,
-    RightStick,
-}
+pub use types::*;
 
 struct GamepadState {
     sdl_controller: GameController,
@@ -167,26 +81,30 @@ pub(crate) fn handle_event(ctx: &mut Context, event: Event) -> Result {
         Event::KeyDown {
             keycode: Some(k), ..
         } => {
-            if let Key::Escape = k {
+            if let SdlKey::Escape = k {
                 if ctx.quit_on_escape {
                     ctx.running = false;
                 }
             }
 
-            ctx.input.current_key_state.insert(k);
+            ctx.input.current_key_state.insert(k.into());
         }
         Event::KeyUp {
             keycode: Some(k), ..
         } => {
             // TODO: This can cause some inputs to be missed at low tick rates.
             // Could consider buffering input releases like Otter2D does?
-            ctx.input.current_key_state.remove(&k);
+            ctx.input.current_key_state.remove(&k.into());
         }
         Event::MouseButtonDown { mouse_btn, .. } => {
-            ctx.input.current_mouse_state.insert(mouse_btn);
+            if let Some(b) = MouseButton::from_sdl(mouse_btn) {
+                ctx.input.current_mouse_state.insert(b);
+            }
         }
         Event::MouseButtonUp { mouse_btn, .. } => {
-            ctx.input.current_mouse_state.remove(&mouse_btn);
+            if let Some(b) = MouseButton::from_sdl(mouse_btn) {
+                ctx.input.current_mouse_state.remove(&b);
+            }
         }
         Event::MouseMotion { x, y, .. } => ctx.input.mouse_position = Vec2::new(x as f32, y as f32),
         Event::TextInput { text, .. } => {
