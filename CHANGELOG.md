@@ -4,6 +4,7 @@
 
 ### Improvements
 
+* **BREAKING:** Tetra now requires Rust 1.32 or higher - this is to allow us to use uniform paths.
 * **BREAKING:** Tetra now has its own `Key` and `MouseButton` types, instead of exporting the ones from the `sdl2` crate. Some key names have been changed to make them more obvious/consistent.
 * **BREAKING:** The deprecated `build_matrix` method has been removed from `DrawParams`.
 
