@@ -15,6 +15,28 @@ This project adheres to Semantic Versioning.
 
 * The deprecated `build_matrix` method has been removed from `DrawParams`.
 
+## [0.2.10] - 2019-02-03
+
+### Added
+
+* `from_data` constructors were added to `Texture`, `Font` and `Sound`, allowing them to be constructed from binary data. This is useful if you want to use `include_bytes` to bundle assets into your executable. Note that an equivalent constructor already existed on `Shader`, which can be used in combination with `include_str`. 
+
+### Changed
+
+* The default shaders have been amended to use GLSL 1.50 instead of GLSL 1.30. This seems to be required to get Tetra working on Mac.
+
+## [0.2.9] - 2019-02-03
+
+### Changed
+
+* Some optimizations have been made to the rendering code, mainly to avoid unnecessary allocations. This nearly doubled the performance of the `bunnymark` example in release mode!
+
+## [0.2.8] - 2019-02-01
+
+### Added
+
+* The `time::get_fps` function was added, which returns the current FPS, averaged out over the last few seconds. ([@selimeren](https://github.com/selimeren) in [#96](https://github.com/17cupsofcoffee/tetra/pull/96))
+
 ## [0.2.7] - 2019-01-23
 
 ### Changed
@@ -207,6 +229,9 @@ This project adheres to Semantic Versioning.
 
 * Initial release!
 
+[0.2.10]: https://github.com/17cupsofcoffee/tetra/compare/0.2.9..0.2.10
+[0.2.9]: https://github.com/17cupsofcoffee/tetra/compare/0.2.8..0.2.9
+[0.2.8]: https://github.com/17cupsofcoffee/tetra/compare/0.2.7..0.2.8
 [0.2.7]: https://github.com/17cupsofcoffee/tetra/compare/0.2.6..0.2.7
 [0.2.6]: https://github.com/17cupsofcoffee/tetra/compare/0.2.5..0.2.6
 [0.2.5]: https://github.com/17cupsofcoffee/tetra/compare/0.2.4..0.2.5
