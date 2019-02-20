@@ -1,0 +1,611 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Tetra</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A simple 2D game framework written in Rust">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li class="affix"><a href="index.html">Tetra</a></li><li><a href="tutorial/index.html"><strong aria-hidden="true">1.</strong> Tutorial</a></li><li><ol class="section"><li><a href="tutorial/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li><a href="tutorial/getting-started.html"><strong aria-hidden="true">1.2.</strong> Getting Started</a></li><li><a href="tutorial/loading-a-texture.html"><strong aria-hidden="true">1.3.</strong> Loading a Texture</a></li></ol></li><li><a href="examples.html"><strong aria-hidden="true">2.</strong> Examples</a></li><li><a href="FAQ.html"><strong aria-hidden="true">3.</strong> FAQ</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Tetra</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#tetra" id="tetra"><h1>Tetra</h1></a>
+<p><a href="https://travis-ci.org/17cupsofcoffee/tetra"><img src="https://travis-ci.org/17cupsofcoffee/tetra.svg?branch=master" alt="Build Status" /></a>
+<a href="https://crates.io/crates/tetra"><img src="https://img.shields.io/crates/v/tetra.svg" alt="Crates.io" /></a>
+<a href="https://www.rust-lang.org/tools/install"><img src="https://img.shields.io/badge/minimum%20rust%20version-1.31-orange.svg" alt="Minimum Rust Version" /></a>
+<a href="https://docs.rs/tetra"><img src="https://docs.rs/tetra/badge.svg" alt="Documentation" /></a>
+<a href="LICENSE"><img src="https://img.shields.io/crates/l/tetra.svg" alt="License" /></a>
+<a href="https://gitter.im/tetra-rs/community"><img src="https://badges.gitter.im/tetra-rs/community.png" alt="Gitter chat" /></a></p>
+<p>Tetra is a simple 2D game framework written in Rust. It uses SDL2 for event handling and OpenGL 3.2+ for rendering.</p>
+<p><strong>Note that Tetra is still extremely early in development!</strong> It may/will have bugs and missing features. That said, you're welcome to give it a go and let me know what you think :)</p>
+<ul>
+<li><a href="https://tetra.seventeencups.net">Website/Tutorial</a></li>
+<li><a href="https://docs.rs/tetra">API Docs</a></li>
+<li><a href="https://tetra.seventeencups.net/FAQ">FAQ</a></li>
+</ul>
+<a class="header" href="#features" id="features"><h2>Features</h2></a>
+<ul>
+<li>XNA/MonoGame-inspired API</li>
+<li>Efficient 2D rendering, with draw call batching by default</li>
+<li>Simple input handling</li>
+<li>Animations/spritesheets</li>
+<li>TTF font rendering</li>
+<li>Multiple screen scaling algorithms, including pixel-perfect variants (for those chunky retro pixels)</li>
+<li>Deterministic game loop, à la <a href="https://gafferongames.com/post/fix_your_timestep/">Fix Your Timestep</a></li>
+</ul>
+<a class="header" href="#installation" id="installation"><h2>Installation</h2></a>
+<p>To add Tetra to your project, add the following line to your <code>Cargo.toml</code> file:</p>
+<pre><code>tetra = &quot;0.2&quot;
+</code></pre>
+<p>Tetra currently requires Rust 1.31 or higher.</p>
+<p>You will also need to install the SDL2 native libraries - full details are provided in the <a href="https://tetra.seventeencups.net/tutorial/installation.html">documentation</a>.</p>
+<a class="header" href="#examples" id="examples"><h2>Examples</h2></a>
+<p>To get a simple window displayed on screen, the following code can be used:</p>
+<pre><pre class="playpen"><code class="language-rust">use tetra::graphics::{self, Color};
+use tetra::{Context, ContextBuilder, State};
+
+struct GameState;
+
+impl State for GameState {
+    fn draw(&amp;mut self, ctx: &amp;mut Context, _dt: f64) -&gt; tetra::Result {
+        // Cornflour blue, as is tradition
+        graphics::clear(ctx, Color::rgb(0.392, 0.584, 0.929));
+        Ok(())
+    }
+}
+
+fn main() -&gt; tetra::Result {
+    ContextBuilder::new(&quot;Hello, world!&quot;, 1280, 720)
+        .build()?
+        .run(&amp;mut GameState)
+}
+</code></pre></pre>
+<p>You can see this example in action by running <code>cargo run --example hello_world</code>.</p>
+<p>The full list of examples is available <a href="https://github.com/17cupsofcoffee/tetra/tree/master/examples">here</a>.</p>
+<a class="header" href="#supportfeedback" id="supportfeedback"><h2>Support/Feedback</h2></a>
+<p>As mentioned above, Tetra is fairly early in development, so there's likely to be bugs/flaky docs/general weirdness. Please feel free to open an issue/PR if you find something, or leave a question in the <a href="https://gitter.im/tetra-rs/community">Gitter chat</a>.</p>
+<p>You can also contact me via <a href="https://twitter.com/17cupsofcoffee">Twitter</a>, or find me lurking in the #gamedev channel on the <a href="https://bit.ly/rust-community">Rust Community Discord</a>.</p>
+<a class="header" href="#tutorial" id="tutorial"><h1>Tutorial</h1></a>
+<ul>
+<li><a href="tutorial/./installation.html">Installation</a></li>
+<li><a href="tutorial/./getting-started.html">Getting Started</a></li>
+<li><a href="tutorial/./loading-a-texture.html">Loading a Texture</a></li>
+</ul>
+<a class="header" href="#installation-1" id="installation-1"><h1>Installation</h1></a>
+<a class="header" href="#prerequisites" id="prerequisites"><h2>Prerequisites</h2></a>
+<p>To get started with Tetra, you'll need a couple of things installed:</p>
+<ul>
+<li>Rust 1.31 or higher</li>
+<li>The SDL 2.0 development libraries</li>
+<li>The ALSA development libraries (only required on Linux)</li>
+</ul>
+<p>Most of this is one-time setup, so let's get it out of the way!</p>
+<a class="header" href="#installing-rust" id="installing-rust"><h3>Installing Rust</h3></a>
+<p>Installing Rust is pretty simple - just go to <a href="https://www.rust-lang.org/tools/install">the website</a> and download the Rustup toolchain manager.</p>
+<p>Note that if you're developing on Windows with the default toolchain, you'll also need to install the <a href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017">Microsoft Visual C++ Build Tools</a>, as Rust uses the MSVC linker when building.</p>
+<a class="header" href="#installing-sdl-20" id="installing-sdl-20"><h3>Installing SDL 2.0</h3></a>
+<p>Tetra uses SDL for windowing and input, so you will need to have both the runtime and development libraries installed.</p>
+<blockquote>
+<p>The instructions below are adapted from the README of the <a href="https://github.com/Rust-SDL2/rust-sdl2">sdl2</a> crate - further information can be found there.</p>
+</blockquote>
+<a class="header" href="#windows" id="windows"><h4>Windows</h4></a>
+<p>If you're using the default MSVC Rust toolchain:</p>
+<ol>
+<li>Go to <a href="https://www.libsdl.org/download-2.0.php">the SDL website</a> and download the Visual C++ version of the development libraries.</li>
+<li>Copy the <code>.lib</code> files from the <code>SDL2-2.0.x/lib/x64</code> folder of the zip to the <code>%USERPROFILE/.rustup/toolchains/stable-x86_64-pc-windows-msvc/lib/rustlib/x86_64-pc-windows-msvc/lib</code> folder on your machine. If you are building on a beta/nightly toolchain, adjust the location accordingly.</li>
+</ol>
+<p>If you're using the GNU-based Rust toolchain:</p>
+<ol>
+<li>Go to <a href="https://www.libsdl.org/download-2.0.php">the SDL website</a> and download the MinGW version of the development libraries.</li>
+<li>Copy the <code>.lib</code> files from the <code>SDL2-2.0.x/x86_64-w64-mingw32/lib</code> folder of the zip to the <code>%USERPROFILE/.rustup/toolchains/stable-x86_64-pc-windows-gnu/lib/rustlib/x86_64-pc-windows-gnu/lib</code> folder on your machine. If you are building on a beta/nightly toolchain, adjust the location accordingly.</li>
+</ol>
+<a class="header" href="#mac" id="mac"><h4>Mac</h4></a>
+<p>The easiest way to install SDL is via <a href="http://brew.sh/">Homebrew</a>:</p>
+<pre><code class="language-bash">brew install sdl2
+</code></pre>
+<p>You will also need to add the following to your <code>~/.bash_profile</code>, if it is not already present.</p>
+<pre><code class="language-bash">export LIBRARY_PATH=&quot;$LIBRARY_PATH:/usr/local/lib&quot;
+</code></pre>
+<a class="header" href="#linux" id="linux"><h4>Linux</h4></a>
+<p>The SDL development libraries are distributed through most Linux package managers - here are a few examples:</p>
+<pre><code class="language-bash"># Ubuntu/Debian
+sudo apt install libsdl2-dev
+
+# Fedora/CentOS
+sudo yum install SDL2-devel
+
+# Arch Linux
+sudo pacman -S sdl2
+</code></pre>
+<a class="header" href="#installing-alsa-linux-only" id="installing-alsa-linux-only"><h3>Installing ALSA (Linux only)</h3></a>
+<p>On Linux, ALSA is used as the audio backend, so you will also need the ALSA development libraries installed. Similar to SDL, you can find these libraries on most Linux package managers:</p>
+<pre><code class="language-bash"># Ubuntu/Debian
+sudo apt install libasound2-dev
+
+# Fedora/CentOS
+sudo yum install alsa-lib-devel
+
+# Arch Linux
+sudo pacman -S alsa-lib
+</code></pre>
+<a class="header" href="#creating-a-new-project" id="creating-a-new-project"><h2>Creating a New Project</h2></a>
+<p>Now that you've got the dependencies set up, we can start making a game!</p>
+<p>First, create a new Cargo project:</p>
+<pre><code class="language-bash">cargo new --bin my-first-tetra-game
+</code></pre>
+<p>Then, add Tetra as a dependency in <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[dependencies]
+tetra = &quot;0.2&quot;
+</code></pre>
+<p>If you're on Windows, you'll need to place the SDL2 .dll in the root of your project (and alongside your .exe when distributing your game). You can download this from the <a href="https://www.libsdl.org/download-2.0.php">'runtime binaries' section of the SDL website</a>.</p>
+<a class="header" href="#next-steps" id="next-steps"><h2>Next Steps</h2></a>
+<p>Once those steps are complete, you're ready to <a href="tutorial/./getting-started.html">start writing your first game with Tetra</a>!</p>
+<a class="header" href="#getting-started" id="getting-started"><h1>Getting Started</h1></a>
+<p>Once you have <a href="tutorial/./installation.html">installed the native dependencies and set up your project</a>, you're ready to start writing a game!</p>
+<a class="header" href="#creating-some-state" id="creating-some-state"><h2>Creating Some State</h2></a>
+<p>The first step is to create a struct to hold your game's state. To begin with, let's create some text, and store a position where we want to render it:</p>
+<pre><code class="language-rust noplaypen">use tetra::graphics::{Text, Font, Vec2};
+
+struct GameState {
+    text: Text,
+    position: Vec2,
+}
+
+impl GameState {
+    fn new() -&gt; GameState {
+        GameState {
+            text: Text::new(&quot;Hello, world!&quot;, Font::default(), 16.0),
+            position: Vec2::new(0.0, 0.0),
+        }
+    }
+}
+</code></pre>
+<a class="header" href="#adding-some-logic" id="adding-some-logic"><h2>Adding Some Logic</h2></a>
+<p>Now that we have some data, we need a way to manipulate it. In Tetra, you do this by implementing the <code>State</code> trait.</p>
+<p><code>State</code> has two methods - <code>update</code>, which is where you write your game logic, and <code>draw</code>, which is where you draw things to the screen. By default, the former is called 60 times a second, and the latter is called in sync with your monitor's refresh rate.</p>
+<p>Let's write some code that draws our text moving across the screen:</p>
+<pre><code class="language-rust noplaypen">use tetra::graphics::{self, Color};
+use tetra::{State, Context};
+
+impl State for GameState {
+    fn update(&amp;mut self, ctx: &amp;mut Context) -&gt; tetra::Result {
+        self.position.x += 1.0;
+
+        Ok(())
+    }
+
+    fn draw(&amp;mut self, ctx: &amp;mut Context, _dt: f64) -&gt; tetra::Result {
+        graphics::clear(ctx, Color::rgb(0.392, 0.584, 0.929));
+        graphics::draw(ctx, &amp;self.text, self.position);
+
+        Ok(())
+    }
+}
+</code></pre>
+<p>You might have a few questions after reading that code:</p>
+<ul>
+<li>What's that <code>Context</code> object that we're passing around? Where does it come from?</li>
+<li>Why do we return <code>Ok(())</code> from the methods?</li>
+</ul>
+<p>To answer these, we'll need to write our program's <code>main</code> function, and actually start our game!</p>
+<a class="header" href="#building-a-context" id="building-a-context"><h2>Building a Context</h2></a>
+<p><code>Context</code> is the object that represents all the global state in the framework (the window settings, the rendering engine, etc.). Most functions provided by Tetra will require you to pass the current context, so that they can read from/write to it. As your game grows, you'll probably write your own functions that pass around <code>Context</code>, too.</p>
+<p>Let's build a new context with a window size of 1280 by 720, and run an instance of our <code>GameState</code> struct on it:</p>
+<pre><code class="language-rust noplaypen">use tetra::ContextBuilder;
+
+fn main() -&gt; tetra::Result {
+    ContextBuilder::new(&quot;My First Tetra Game&quot;, 1280, 720)
+        .build()?
+        .run(&amp;mut GameState::new())
+}
+</code></pre>
+<p>Note that both our <code>main</code> function and the <code>run</code> method return <code>tetra::Result</code>, just like our <code>update</code> and <code>draw</code> did. If we'd returned an error from <code>update</code> or <code>draw</code> instead of <code>Ok(())</code>, the game would stop running, and <code>run</code> would return that error to be handled or logged out. In our case, we just pass it on as <code>main</code>'s return value too - Rust will automatically print errors in this case.</p>
+<p>If you run <code>cargo run</code> from the command line, you should now see your text scrolling across the screen!</p>
+<a class="header" href="#next-steps-1" id="next-steps-1"><h2>Next Steps</h2></a>
+<p>In <a href="tutorial/./loading-a-texture.html">the next chapter</a>, we'll try loading a texture to display on the screen.</p>
+<p>Here's the full example from this chapter:</p>
+<pre><code class="language-rust noplaypen">use tetra::graphics::{self, Color, Text, Font, Vec2};
+use tetra::{State, Context, ContextBuilder};
+
+struct GameState {
+    text: Text,
+    position: Vec2,
+}
+
+impl GameState {
+    fn new() -&gt; GameState {
+        GameState {
+            text: Text::new(&quot;Hello, world!&quot;, Font::default(), 16.0),
+            position: Vec2::new(0.0, 0.0),
+        }
+    }
+}
+
+impl State for GameState {
+    fn update(&amp;mut self, ctx: &amp;mut Context) -&gt; tetra::Result {
+        self.position.x += 1.0;
+
+        Ok(())
+    }
+
+    fn draw(&amp;mut self, ctx: &amp;mut Context, _dt: f64) -&gt; tetra::Result {
+        graphics::clear(ctx, Color::rgb(0.392, 0.584, 0.929));
+        graphics::draw(ctx, &amp;self.text, self.position);
+
+        Ok(())
+    }
+}
+
+fn main() -&gt; tetra::Result {
+    ContextBuilder::new(&quot;My First Tetra Game&quot;, 1280, 720)
+        .build()?
+        .run(&amp;mut GameState::new())
+}
+</code></pre>
+<a class="header" href="#loading-a-texture" id="loading-a-texture"><h1>Loading a Texture</h1></a>
+<p>In the <a href="tutorial/./getting-started.html">last chapter</a>, we got a basic window on the screen, and displayed some text. Now let's take it one step further, and display an image from a file.</p>
+<p>If you didn't follow along with the previous chapter, copy <a href="tutorial/getting-started.html#next-steps">the final code</a> into your <code>main.rs</code>.</p>
+<a class="header" href="#adding-a-texture-to-gamestate" id="adding-a-texture-to-gamestate"><h2>Adding a Texture to GameState</h2></a>
+<p>For this example, we'll use a sprite that I drew - excuse the programmer art:</p>
+<p><a href="./player.png"><img src="./player.png" alt="A terrible pixel art knight." /></a></p>
+<p>Save that image to the root of your project. We can now load it in our <code>GameState</code> constructor:</p>
+<pre><code class="language-rust noplaypen">use tetra::graphics::{Texture, Vec2};
+use tetra::Context;
+
+struct GameState {
+    texture: Texture,
+    position: Vec2,
+}
+
+impl GameState {
+    fn new(ctx: &amp;mut Context) -&gt; tetra::Result&lt;GameState&gt; {
+        Ok(GameState {
+            texture: Texture::new(ctx, &quot;./player.png&quot;)?,
+            position: Vec2::new(0.0, 0.0),
+        })
+    }
+}
+</code></pre>
+<p>Note that:</p>
+<ul>
+<li>We now need to pass the <code>Context</code> into the constructor so that we can pass it to <code>Texture::new</code> - this is so the texture can be loaded into your GPU memory.</li>
+<li><code>Texture::new</code> can fail (e.g. if you enter the wrong path), so we need to return <code>tetra::Result&lt;GameState&gt;</code> instead of just <code>GameState</code>.</li>
+</ul>
+<p>The game logic should pretty much stay the same, although you'll need to amend your <code>draw</code> method to replace <code>self.text</code> with <code>self.texture</code>.</p>
+<a class="header" href="#constructing-the-state" id="constructing-the-state"><h2>Constructing the State</h2></a>
+<p>If you try to run your game now, you'll get a couple of compile errors, due to the changes we made to our constructor:</p>
+<pre><code>error[E0061]: this function takes 1 parameter but 0 parameters were supplied
+  --&gt; main.rs:39:10
+   |
+10 |     fn new(ctx: &amp;mut Context) -&gt; tetra::Result&lt;GameState&gt; {
+   |     ----------------------------------------------------- defined here
+...
+39 |         .run(&amp;mut GameState::new())
+   |                   ^^^^^^^^^^^^^^^^ expected 1 parameter
+
+error[E0277]: the trait bound `std::result::Result&lt;GameState, tetra::error::TetraError&gt;: tetra::State` is not satisfied
+  --&gt; main.rs:39:10
+   |
+39 |         .run(&amp;mut GameState::new())
+   |          ^^^ the trait `tetra::State` is not implemented for `std::result::Result&lt;GameState, tetra::error::TetraError&gt;`
+</code></pre>
+<p>The obvious solution would be to write something like this:</p>
+<pre><code class="language-rust noplaypen">fn main() -&gt; tetra::Result {
+    let mut ctx = ContextBuilder::new(&quot;My First Tetra Game&quot;, 1280, 720)
+        .build()?;
+
+    let mut state = GameState::new(&amp;mut ctx)?;
+
+    ctx.run(&amp;mut state)
+}
+</code></pre>
+<p>But wait, there's a simpler way! <code>Context</code> provides a method called <code>run_with</code> that will use a closure to initialize your state before running the game:</p>
+<pre><code class="language-rust noplaypen">fn main() -&gt; tetra::Result {
+    ContextBuilder::new(&quot;My First Tetra Game&quot;, 1280, 720)
+        .build()?
+        .run_with(|ctx| GameState::new(ctx))
+}
+</code></pre>
+<p>And since our constructor's function signature is the same as that of the closure that <code>run_with</code> expects, we can simplify this even further:</p>
+<pre><code class="language-rust noplaypen">fn main() -&gt; tetra::Result {
+    ContextBuilder::new(&quot;My First Tetra Game&quot;, 1280, 720)
+        .build()?
+        .run_with(GameState::new)
+}
+</code></pre>
+<p>Much nicer! If you run the game now, you should see our little knight running across the screen!</p>
+<a class="header" href="#next-steps-2" id="next-steps-2"><h2>Next Steps</h2></a>
+<p>This is currently the last chapter of the tutorial (although more will be added in the future). To learn more about using Tetra, check out the <a href="https://docs.rs/tetra/">API documentation</a>, or look at the <a href="https://github.com/17cupsofcoffee/tetra/tree/master/examples">examples</a> on GitHub.</p>
+<p>Here's the full example from this chapter:</p>
+<pre><code class="language-rust noplaypen">use tetra::graphics::{self, Color, Texture, Vec2};
+use tetra::{State, Context, ContextBuilder};
+
+struct GameState {
+    texture: Texture,
+    position: Vec2,
+}
+
+impl GameState {
+    fn new(ctx: &amp;mut Context) -&gt; tetra::Result&lt;GameState&gt; {
+        Ok(GameState {
+            texture: Texture::new(ctx, &quot;./player.png&quot;)?,
+            position: Vec2::new(0.0, 0.0),
+        })
+    }
+}
+
+impl State for GameState {
+    fn update(&amp;mut self, ctx: &amp;mut Context) -&gt; tetra::Result {
+        self.position.x += 1.0;
+
+        Ok(())
+    }
+
+    fn draw(&amp;mut self, ctx: &amp;mut Context, _dt: f64) -&gt; tetra::Result {
+        graphics::clear(ctx, Color::rgb(0.392, 0.584, 0.929));
+        graphics::draw(ctx, &amp;self.texture, self.position);
+
+        Ok(())
+    }
+}
+
+fn main() -&gt; tetra::Result {
+    ContextBuilder::new(&quot;My First Tetra Game&quot;, 1280, 720)
+        .build()?
+        .run_with(GameState::new)
+}
+</code></pre>
+<a class="header" href="#examples-1" id="examples-1"><h1>Examples</h1></a>
+<p>Tetra has a fairly large suite of examples - to try them out, clone the repository and run:</p>
+<pre><code class="language-bash">cargo run --example example_name
+</code></pre>
+<p>You can also click on the name of the example below to view the source code.</p>
+<!--
+The links below are provided in full instead of being relative so that they
+don't break when rendered by mdbook.
+-->
+<table><thead><tr><th> Name </th><th> Category </th><th> Description </th></tr></thead><tbody>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/hello_world.rs"><code>hello_world</code></a> </td><td> Basic </td><td> Opens a window and clears it with a solid color. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/texture.rs"><code>texture</code></a> </td><td> Graphics </td><td> Loads and displays a texture. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/animation.rs"><code>animation</code></a> </td><td> Graphics </td><td>  Displays an animation, made up of regions from a texture. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/text.rs"><code>text</code></a> </td><td> Graphics </td><td> Displays text using a TTF font. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/nineslice.rs"><code>nineslice</code></a> </td><td> Graphics </td><td> Slices a texture into nine segments to display a dialog box. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/scaling.rs"><code>scaling</code></a> </td><td> Graphics </td><td> Demonstrates the different screen scaling algorithms. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/shaders.rs"><code>shaders</code></a> </td><td> Graphics </td><td> Uses a custom shader to render a texture. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/audi.rs"><code>audio</code></a> </td><td> Audio </td><td> Plays back an audio file. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/keyboard.rs"><code>keyboard</code></a> </td><td> Input </td><td> Moves a texture around based on keyboard input. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/mouse.rs"><code>mouse</code></a> </td><td> Input </td><td> Moves a texture around based on mouse input. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/gamepad.rs"><code>gamepad</code></a> </td><td> Input </td><td> Displays the input from a connected gamepad. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/text_input.rs"><code>text_input</code></a> </td><td> Input </td><td> Displays text as it is typed in by the player. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/bunnymark.rs"><code>bunnymark</code></a> </td><td> Benchmark </td><td> Benchmarks rendering performance by rendering lots of bunnies. </td></tr>
+<tr><td> <a href="https://github.com/17cupsofcoffee/tetra/blob/master/examples/tetras.rs"><code>tetras</code></a> </td><td> Game </td><td> A full example game (which is entirely legally distinct from a certain other block-based puzzle game <em>cough</em>). </td></tr>
+</tbody></table>
+<a class="header" href="#faq" id="faq"><h1>FAQ</h1></a>
+<a class="header" href="#general" id="general"><h2>General</h2></a>
+<a class="header" href="#will-tetra-be-written-in-pure-rust-eventually" id="will-tetra-be-written-in-pure-rust-eventually"><h3>Will Tetra be written in pure Rust eventually?</h3></a>
+<p>Probably not - SDL2 is a stable and well-tested foundation for building games, and it runs on basically every platform under the sun, so I'm hesitant to replace it. That's likely to remain the only non-Rust dependency, however.</p>
+<p>If you're looking for a similar engine that <em>is</em> working towards being pure Rust, <a href="https://github.com/ggez/ggez">GGEZ</a> and <a href="https://github.com/ryanisaacg/quicksilver">Quicksilver</a> are excellent options.</p>
+<a class="header" href="#why-is-it-called-tetra" id="why-is-it-called-tetra"><h3>Why is it called Tetra?</h3></a>
+<p>I'm terrible at naming projects, and <a href="https://www.youtube.com/watch?v=g3xg28yaZ5E">this</a> happened to be playing when I was typing <code>cargo new</code>. I wish there was a better origin story than that :D</p>
+<a class="header" href="#do-i-have-to-install-sdl-manually" id="do-i-have-to-install-sdl-manually"><h3>Do I have to install SDL manually?</h3></a>
+<p>It's possible to have your project automatically compile SDL2 from source as part of the build process. To do so, specify your dependency on Tetra like this:</p>
+<pre><code class="language-toml">[dependencies.tetra]
+version = &quot;0.2&quot;
+features = [&quot;sdl2_bundled&quot;]
+</code></pre>
+<p>This is more convienent, but does however require you to have various build tools installed on your machine (e.g. a C compiler, CMake, etc). In particular, this can be a pain on Windows - hence why it's not the default!</p>
+<a class="header" href="#can-i-static-link-sdl" id="can-i-static-link-sdl"><h3>Can I static link SDL?</h3></a>
+<p>If you want to avoid your users having to install SDL2 themselves (or you having to distribute it as a DLL), you can specify for it to be statically linked:</p>
+<pre><code class="language-toml">[dependencies.tetra]
+version = &quot;0.2&quot;
+features = [&quot;sdl2_static_link&quot;]
+</code></pre>
+<p>This comes with some trade-offs, however - make sure you read <a href="https://hg.libsdl.org/SDL/file/default/docs/README-dynapi.md">this document</a> in the SDL2 repository so that you understand what you're doing!</p>
+<a class="header" href="#compatibility" id="compatibility"><h2>Compatibility</h2></a>
+<a class="header" href="#why-am-i-getting-a-black-screen" id="why-am-i-getting-a-black-screen"><h3>Why am I getting a black screen?</h3></a>
+<p>First, check the debug output on the console to see which OpenGL version your drivers are using - Tetra primarily aims to support 3.2 and above, and explicitly will <strong>not</strong> work with anything lower than 3.0.</p>
+<p>If your OpenGL version is higher than 3.0 and you're still getting a black screen, that may indicate a bug - I currently only have access to a Windows machine with a reasonably modern graphics card, so it's not outside the realms of possibility that something that works for me might be broken for others! Please submit an issue, and I'll try to fix it and release a patch version.</p>
+<a class="header" href="#performance" id="performance"><h2>Performance</h2></a>
+<a class="header" href="#why-is-my-game-running-slow" id="why-is-my-game-running-slow"><h3>Why is my game running slow?</h3></a>
+<p>Rust's performance isn't great in debug mode by default, so if you haven't tweaked your optimization settings, Tetra can get CPU-bound quite quickly. <a href="https://github.com/ggez/ggez/blob/master/docs/FAQ.md#imagesound-loading-and-font-rendering-is-slow">Other Rust game engines run into this issue too</a>.</p>
+<p>If your framerate is starting to drop, either run the game in release mode (<code>cargo run --release</code>) or set the debug <code>opt-level</code> to something higher than zero in your <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[profile.dev]
+opt-level = 1
+</code></pre>
+<a class="header" href="#benchmarks" id="benchmarks"><h4>Benchmarks</h4></a>
+<p>The impact of this can be observed by running the <code>bunnymark</code> example both with and without the <code>--release</code> flag. This example adds 100 new sprites to the screen every time the user clicks, until rendering conistently drops below 60fps.</p>
+<p>These were the results when I ran it against Tetra 0.2.9 on my local machine:</p>
+<table><thead><tr><th> Configuration </th><th> Bunnies Rendered </th></tr></thead><tbody>
+<tr><td> Debug </td><td> 3200 </td></tr>
+<tr><td> Release </td><td> 230000 </td></tr>
+</tbody></table>
+<p>For reference, my system specs are:</p>
+<ul>
+<li>CPU: AMD Ryzen 5 1600 3.2GHz</li>
+<li>GPU: NVidia GeForce GTX 1050 Ti</li>
+<li>RAM: 8GB DDR4</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

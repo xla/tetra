@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Installation - Tetra</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A simple 2D game framework written in Rust">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li class="affix"><a href="../index.html">Tetra</a></li><li><a href="../tutorial/index.html"><strong aria-hidden="true">1.</strong> Tutorial</a></li><li><ol class="section"><li><a href="../tutorial/installation.html" class="active"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li><a href="../tutorial/getting-started.html"><strong aria-hidden="true">1.2.</strong> Getting Started</a></li><li><a href="../tutorial/loading-a-texture.html"><strong aria-hidden="true">1.3.</strong> Loading a Texture</a></li></ol></li><li><a href="../examples.html"><strong aria-hidden="true">2.</strong> Examples</a></li><li><a href="../FAQ.html"><strong aria-hidden="true">3.</strong> FAQ</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Tetra</h1> 
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#installation" id="installation"><h1>Installation</h1></a>
+<a class="header" href="#prerequisites" id="prerequisites"><h2>Prerequisites</h2></a>
+<p>To get started with Tetra, you'll need a couple of things installed:</p>
+<ul>
+<li>Rust 1.31 or higher</li>
+<li>The SDL 2.0 development libraries</li>
+<li>The ALSA development libraries (only required on Linux)</li>
+</ul>
+<p>Most of this is one-time setup, so let's get it out of the way!</p>
+<a class="header" href="#installing-rust" id="installing-rust"><h3>Installing Rust</h3></a>
+<p>Installing Rust is pretty simple - just go to <a href="https://www.rust-lang.org/tools/install">the website</a> and download the Rustup toolchain manager.</p>
+<p>Note that if you're developing on Windows with the default toolchain, you'll also need to install the <a href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017">Microsoft Visual C++ Build Tools</a>, as Rust uses the MSVC linker when building.</p>
+<a class="header" href="#installing-sdl-20" id="installing-sdl-20"><h3>Installing SDL 2.0</h3></a>
+<p>Tetra uses SDL for windowing and input, so you will need to have both the runtime and development libraries installed.</p>
+<blockquote>
+<p>The instructions below are adapted from the README of the <a href="https://github.com/Rust-SDL2/rust-sdl2">sdl2</a> crate - further information can be found there.</p>
+</blockquote>
+<a class="header" href="#windows" id="windows"><h4>Windows</h4></a>
+<p>If you're using the default MSVC Rust toolchain:</p>
+<ol>
+<li>Go to <a href="https://www.libsdl.org/download-2.0.php">the SDL website</a> and download the Visual C++ version of the development libraries.</li>
+<li>Copy the <code>.lib</code> files from the <code>SDL2-2.0.x/lib/x64</code> folder of the zip to the <code>%USERPROFILE/.rustup/toolchains/stable-x86_64-pc-windows-msvc/lib/rustlib/x86_64-pc-windows-msvc/lib</code> folder on your machine. If you are building on a beta/nightly toolchain, adjust the location accordingly.</li>
+</ol>
+<p>If you're using the GNU-based Rust toolchain:</p>
+<ol>
+<li>Go to <a href="https://www.libsdl.org/download-2.0.php">the SDL website</a> and download the MinGW version of the development libraries.</li>
+<li>Copy the <code>.lib</code> files from the <code>SDL2-2.0.x/x86_64-w64-mingw32/lib</code> folder of the zip to the <code>%USERPROFILE/.rustup/toolchains/stable-x86_64-pc-windows-gnu/lib/rustlib/x86_64-pc-windows-gnu/lib</code> folder on your machine. If you are building on a beta/nightly toolchain, adjust the location accordingly.</li>
+</ol>
+<a class="header" href="#mac" id="mac"><h4>Mac</h4></a>
+<p>The easiest way to install SDL is via <a href="http://brew.sh/">Homebrew</a>:</p>
+<pre><code class="language-bash">brew install sdl2
+</code></pre>
+<p>You will also need to add the following to your <code>~/.bash_profile</code>, if it is not already present.</p>
+<pre><code class="language-bash">export LIBRARY_PATH=&quot;$LIBRARY_PATH:/usr/local/lib&quot;
+</code></pre>
+<a class="header" href="#linux" id="linux"><h4>Linux</h4></a>
+<p>The SDL development libraries are distributed through most Linux package managers - here are a few examples:</p>
+<pre><code class="language-bash"># Ubuntu/Debian
+sudo apt install libsdl2-dev
+
+# Fedora/CentOS
+sudo yum install SDL2-devel
+
+# Arch Linux
+sudo pacman -S sdl2
+</code></pre>
+<a class="header" href="#installing-alsa-linux-only" id="installing-alsa-linux-only"><h3>Installing ALSA (Linux only)</h3></a>
+<p>On Linux, ALSA is used as the audio backend, so you will also need the ALSA development libraries installed. Similar to SDL, you can find these libraries on most Linux package managers:</p>
+<pre><code class="language-bash"># Ubuntu/Debian
+sudo apt install libasound2-dev
+
+# Fedora/CentOS
+sudo yum install alsa-lib-devel
+
+# Arch Linux
+sudo pacman -S alsa-lib
+</code></pre>
+<a class="header" href="#creating-a-new-project" id="creating-a-new-project"><h2>Creating a New Project</h2></a>
+<p>Now that you've got the dependencies set up, we can start making a game!</p>
+<p>First, create a new Cargo project:</p>
+<pre><code class="language-bash">cargo new --bin my-first-tetra-game
+</code></pre>
+<p>Then, add Tetra as a dependency in <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[dependencies]
+tetra = &quot;0.2&quot;
+</code></pre>
+<p>If you're on Windows, you'll need to place the SDL2 .dll in the root of your project (and alongside your .exe when distributing your game). You can download this from the <a href="https://www.libsdl.org/download-2.0.php">'runtime binaries' section of the SDL website</a>.</p>
+<a class="header" href="#next-steps" id="next-steps"><h2>Next Steps</h2></a>
+<p>Once those steps are complete, you're ready to <a href="./getting-started.html">start writing your first game with Tetra</a>!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../tutorial/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../tutorial/getting-started.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../tutorial/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../tutorial/getting-started.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

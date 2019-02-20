@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>FAQ - Tetra</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A simple 2D game framework written in Rust">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li class="affix"><a href="index.html">Tetra</a></li><li><a href="tutorial/index.html"><strong aria-hidden="true">1.</strong> Tutorial</a></li><li><ol class="section"><li><a href="tutorial/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li><a href="tutorial/getting-started.html"><strong aria-hidden="true">1.2.</strong> Getting Started</a></li><li><a href="tutorial/loading-a-texture.html"><strong aria-hidden="true">1.3.</strong> Loading a Texture</a></li></ol></li><li><a href="examples.html"><strong aria-hidden="true">2.</strong> Examples</a></li><li><a href="FAQ.html" class="active"><strong aria-hidden="true">3.</strong> FAQ</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Tetra</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#faq" id="faq"><h1>FAQ</h1></a>
+<a class="header" href="#general" id="general"><h2>General</h2></a>
+<a class="header" href="#will-tetra-be-written-in-pure-rust-eventually" id="will-tetra-be-written-in-pure-rust-eventually"><h3>Will Tetra be written in pure Rust eventually?</h3></a>
+<p>Probably not - SDL2 is a stable and well-tested foundation for building games, and it runs on basically every platform under the sun, so I'm hesitant to replace it. That's likely to remain the only non-Rust dependency, however.</p>
+<p>If you're looking for a similar engine that <em>is</em> working towards being pure Rust, <a href="https://github.com/ggez/ggez">GGEZ</a> and <a href="https://github.com/ryanisaacg/quicksilver">Quicksilver</a> are excellent options.</p>
+<a class="header" href="#why-is-it-called-tetra" id="why-is-it-called-tetra"><h3>Why is it called Tetra?</h3></a>
+<p>I'm terrible at naming projects, and <a href="https://www.youtube.com/watch?v=g3xg28yaZ5E">this</a> happened to be playing when I was typing <code>cargo new</code>. I wish there was a better origin story than that :D</p>
+<a class="header" href="#do-i-have-to-install-sdl-manually" id="do-i-have-to-install-sdl-manually"><h3>Do I have to install SDL manually?</h3></a>
+<p>It's possible to have your project automatically compile SDL2 from source as part of the build process. To do so, specify your dependency on Tetra like this:</p>
+<pre><code class="language-toml">[dependencies.tetra]
+version = &quot;0.2&quot;
+features = [&quot;sdl2_bundled&quot;]
+</code></pre>
+<p>This is more convienent, but does however require you to have various build tools installed on your machine (e.g. a C compiler, CMake, etc). In particular, this can be a pain on Windows - hence why it's not the default!</p>
+<a class="header" href="#can-i-static-link-sdl" id="can-i-static-link-sdl"><h3>Can I static link SDL?</h3></a>
+<p>If you want to avoid your users having to install SDL2 themselves (or you having to distribute it as a DLL), you can specify for it to be statically linked:</p>
+<pre><code class="language-toml">[dependencies.tetra]
+version = &quot;0.2&quot;
+features = [&quot;sdl2_static_link&quot;]
+</code></pre>
+<p>This comes with some trade-offs, however - make sure you read <a href="https://hg.libsdl.org/SDL/file/default/docs/README-dynapi.md">this document</a> in the SDL2 repository so that you understand what you're doing!</p>
+<a class="header" href="#compatibility" id="compatibility"><h2>Compatibility</h2></a>
+<a class="header" href="#why-am-i-getting-a-black-screen" id="why-am-i-getting-a-black-screen"><h3>Why am I getting a black screen?</h3></a>
+<p>First, check the debug output on the console to see which OpenGL version your drivers are using - Tetra primarily aims to support 3.2 and above, and explicitly will <strong>not</strong> work with anything lower than 3.0.</p>
+<p>If your OpenGL version is higher than 3.0 and you're still getting a black screen, that may indicate a bug - I currently only have access to a Windows machine with a reasonably modern graphics card, so it's not outside the realms of possibility that something that works for me might be broken for others! Please submit an issue, and I'll try to fix it and release a patch version.</p>
+<a class="header" href="#performance" id="performance"><h2>Performance</h2></a>
+<a class="header" href="#why-is-my-game-running-slow" id="why-is-my-game-running-slow"><h3>Why is my game running slow?</h3></a>
+<p>Rust's performance isn't great in debug mode by default, so if you haven't tweaked your optimization settings, Tetra can get CPU-bound quite quickly. <a href="https://github.com/ggez/ggez/blob/master/docs/FAQ.md#imagesound-loading-and-font-rendering-is-slow">Other Rust game engines run into this issue too</a>.</p>
+<p>If your framerate is starting to drop, either run the game in release mode (<code>cargo run --release</code>) or set the debug <code>opt-level</code> to something higher than zero in your <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[profile.dev]
+opt-level = 1
+</code></pre>
+<a class="header" href="#benchmarks" id="benchmarks"><h4>Benchmarks</h4></a>
+<p>The impact of this can be observed by running the <code>bunnymark</code> example both with and without the <code>--release</code> flag. This example adds 100 new sprites to the screen every time the user clicks, until rendering conistently drops below 60fps.</p>
+<p>These were the results when I ran it against Tetra 0.2.9 on my local machine:</p>
+<table><thead><tr><th> Configuration </th><th> Bunnies Rendered </th></tr></thead><tbody>
+<tr><td> Debug </td><td> 3200 </td></tr>
+<tr><td> Release </td><td> 230000 </td></tr>
+</tbody></table>
+<p>For reference, my system specs are:</p>
+<ul>
+<li>CPU: AMD Ryzen 5 1600 3.2GHz</li>
+<li>GPU: NVidia GeForce GTX 1050 Ti</li>
+<li>RAM: 8GB DDR4</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="examples.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="examples.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
