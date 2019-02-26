@@ -437,7 +437,7 @@ pub fn clear(ctx: &mut Context, color: Color) {
 
 // TODO: This function really needs cleaning up before it can be exposed publicly.
 
-pub(crate) fn push_quad(
+pub fn push_quad(
     ctx: &mut Context,
     x1: f32,
     y1: f32,
